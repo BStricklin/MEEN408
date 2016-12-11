@@ -5,7 +5,7 @@ DCMOTOR::DCMOTOR(int PWMNumberr, int EQEPNumberr)
   // the commands above with : pwmconstructor, eqepconstructor are called an
   // initializer list. We used to initialize the member variables, especially
   // when they are a instances of our own classes
-  setk_t(0);
+  setk_trq(0);
   setk_emf(0);
   // We now unenable the motor
   enable(0);
@@ -28,8 +28,8 @@ int DCMOTOR::getPWMDutyCycle() {
 }
 double setk_emf(double k_emff) { k_emf = k_emff; }
 double getk_emf() { return k_emf; }
-double setk_t(double k_tt) { k_t = k_tt; }
-double getk_t() { return k_t; }
+double setk_trq(double k_trqq) { k_trq = k_trqq; }
+double getk_trq() { return k_trq; }
 void DCMOTOR::enable(int enablee) {
   if (enablee != 0) { // so long as the input is not zero, we accept it as enable
     enablee = 1;
