@@ -24,7 +24,7 @@ private:
 
 public:
   DCMOTOR(int PWMNumberr, int EQEPNumberr);
-  ~DCMOTOR();
+//~DCMOTOR();
   int getAngle();
   void setPWMPeriod(int Periodd);
   int getPWMPeriod();
