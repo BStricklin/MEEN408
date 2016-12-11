@@ -1,8 +1,8 @@
-#include <stdio.h>
-#include <unistd.h>
 #include <iostream>
 #include <sstream>
+#include <stdio.h>
 #include <string>
+#include <unistd.h>
 using namespace std;
 
 int main() {
@@ -73,7 +73,7 @@ int main() {
     e_d = e - e_prev;
     e_prev = e;
     e_i += e;
-    float u = 2000.0 * e + 50 * e_d + 10 * e_i;  // The actual controller part
+    float u = 2000.0 * e + 50 * e_d + 10 * e_i; // The actual controller part
     pulsewidth = 1460000 + (int)u;
 
     if (pulsewidth < 1000000) {
@@ -92,7 +92,7 @@ int main() {
       fclose(PWM0Handle);
     }
 
-    usleep(20000);  // sleep for 20 milliseconds (20000 microseconds)
+    usleep(20000); // sleep for 20 milliseconds (20000 microseconds)
   }
 
   if ((PWM0Handle = fopen(PWM0Dutycycle, "r+")) != NULL) {

@@ -7,26 +7,26 @@ PWM::PWM(int PWMNumberr, int Periodd, int DutyCyclee) {
   std::cout << "PWM Constructor Start\n.";
   // Set filename strings
   std::stringstream ss;
-  ss << "/sys/class/pwm/pwmchip0/pwm" << PWMNumber << "/";  // PWMFile
-  PWMFile = ss.str();                                       //
-  ss.clear();                                               //
-  ss.str(std::string());                                    //
-  ss << PWMFile << "period";                                // PeriodFile
-  PWMPeriodFile = ss.str();                                 //
-  ss.clear();                                               //
-  ss.str(std::string());                                    //
-  ss << PWMFile << "duty_cycle";                            // DutyCycleFile
-  PWMDutyCycleFile = ss.str();                              //
-  ss.clear();                                               //
-  ss.str(std::string());                                    //
-  ss << PWMFile << "polarity";                              // PolarityFile
-  PWMPolarityFile = ss.str();                               //
-  ss.clear();                                               //
-  ss.str(std::string());                                    //
-  ss << PWMFile << "enable";                                // EnableFile
-  PWMEnableFile = ss.str();                                 //
-  ss.clear();                                               //
-  ss.str(std::string());                                    //
+  ss << "/sys/class/pwm/pwmchip0/pwm" << PWMNumber << "/"; // PWMFile
+  PWMFile = ss.str();                                      //
+  ss.clear();                                              //
+  ss.str(std::string());                                   //
+  ss << PWMFile << "period";                               // PeriodFile
+  PWMPeriodFile = ss.str();                                //
+  ss.clear();                                              //
+  ss.str(std::string());                                   //
+  ss << PWMFile << "duty_cycle";                           // DutyCycleFile
+  PWMDutyCycleFile = ss.str();                             //
+  ss.clear();                                              //
+  ss.str(std::string());                                   //
+  ss << PWMFile << "polarity";                             // PolarityFile
+  PWMPolarityFile = ss.str();                              //
+  ss.clear();                                              //
+  ss.str(std::string());                                   //
+  ss << PWMFile << "enable";                               // EnableFile
+  PWMEnableFile = ss.str();                                //
+  ss.clear();                                              //
+  ss.str(std::string());                                   //
 
   // Check if the PWM device is in slots
   std::string PWMSlots = "/sys/devices/platform/bone_capemgr/slots";
@@ -50,8 +50,8 @@ PWM::PWM(int PWMNumberr, int Periodd, int DutyCyclee) {
     std::cout << "Cannot export the PWM Pin\n";
     // throw exception;
   } else {
-    ofs << PWMNumber;  // write pin number to export file
-    ofs.close();       // and close the file
+    ofs << PWMNumber; // write pin number to export file
+    ofs.close();      // and close the file
     std::cout << "Exported PWM pin." << std::endl;
   }
 
@@ -76,9 +76,9 @@ PWM::~PWM() {
     std::cout << "Cannot unexport the PWM Pin\n";
     // throw exception;
   } else {
-    ofs << PWMNumber;  // write pin number to unexport file
+    ofs << PWMNumber; // write pin number to unexport file
   }
-  ofs.close();  // and close the file
+  ofs.close(); // and close the file
 }
 
 void PWM::setPeriod(int Periodd) {

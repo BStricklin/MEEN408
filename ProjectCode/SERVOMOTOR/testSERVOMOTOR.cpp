@@ -1,7 +1,7 @@
-#include <unistd.h>
+#include "DCMOTOR.h"
 #include <iostream>
 #include <string>
-#include "DCMOTOR.h"
+#include <unistd.h>
 using namespace std;
 int main() {
   cout << " Will this do anything at all?" << endl;

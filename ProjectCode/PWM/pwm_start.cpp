@@ -1,7 +1,7 @@
+#include "PWM.h"
+#include <iostream>
 #include <stdio.h>
 #include <unistd.h>
-#include <iostream>
-#include "PWM.h"
 using namespace std;
 
 int main() {

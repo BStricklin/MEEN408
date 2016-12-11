@@ -1,5 +1,5 @@
-#include <iostream>
 #include "ADC.h"
+#include <iostream>
 
 int main() {
   ADC myADC(5);
