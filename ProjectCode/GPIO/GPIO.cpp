@@ -7,6 +7,7 @@ GPIO::GPIO(int gpioPinNumberr, std::string directionn) {
     // throw exception;
   }
   // Set internal port parameters
+  cout << "GPIO Constuctor.\n"
   gpioPinNumber = gpioPinNumberr;
   direction = directionn;
   // Set file strings
