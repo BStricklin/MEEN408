@@ -1,7 +1,7 @@
 #include "DCMOTOR.h"
 
 DCMOTOR::DCMOTOR(int PWMNumberr, int EQEPNumberr)
-    : motorPWM(PWMNumberr, 1000000, 0), motorEQEP(EQEPNumberr) {
+    : motorPWM(PWMNumberr, 999999, 0), motorEQEP(EQEPNumberr) {
   // the commands above with : pwmconstructor, eqepconstructor are called an
   // initializer list. We used to initialize the member variables, especially
   // when they are a instances of our own classes
@@ -21,7 +21,7 @@ int DCMOTOR::getPWMPeriod() {
   return motorPWM.getPeriod(); // get the pwm period from the pwm object
 }
 void DCMOTOR::setPWMDutyCycle(int DutyCyclee) {
-  int DutyCycleActual = int(DutyCyclee*1.0*getPWMDutyCycle());
+  int DutyCycleActual = int(DutyCyclee/100.0*getPWMPeriod());
   motorPWM.setDutyCycle(DutyCycleActual);
 }
 int DCMOTOR::getPWMDutyCycle() {
