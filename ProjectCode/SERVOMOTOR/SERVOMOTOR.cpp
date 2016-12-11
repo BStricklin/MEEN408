@@ -3,7 +3,7 @@
 PWM servoPWM  // (pin_number, period, duty_cycle)
 
 SERVOMOTOR::SERVOMOTOR()
-:servoPWM(2, 10000000, 0)
+:servoPWM(2, 20000000, 0)
 {}
 
 SERVOMOTOR::~SERVOMOTOR() {
@@ -19,16 +19,14 @@ SERVOMOTOR::void setAngle(int Anglee) {
 
   int pulsewidth = 0;
   pulsewidth = (upper_limit-lower_limit)/(theta_high-theta_low) * Angle + lower_limit;
-
-  servoPWM.setPWMPeriod(upper_limit);
   servoPWM.setPWMDutyCycle(pulsewidth);
 
 }
 
 SERVOMOTOR::void gripperOpen() {
-
+  servoPWM.setPWMDutyCycle(upper_limit)
 }
 
 SERVOMOTOR::void gripperClose() {
-
+  servoPWM.setPWMDutyCycle(lower_limit)
 }
