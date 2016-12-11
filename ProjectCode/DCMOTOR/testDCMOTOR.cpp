@@ -5,7 +5,7 @@
 using namespace std;
 int main()
 {
-  DCMOTOR myDCMOTOR(0,2);
+  DCMOTOR myDCMOTOR(0,2, 60, 60);
   myDCMOTOR.enable(0);
   myDCMOTOR.setPWMDutyCycle(50);
   cout << "Turn     " << endl;

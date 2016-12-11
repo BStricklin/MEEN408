@@ -1,7 +1,9 @@
 #include "DCMOTOR.h"
 
-DCMOTOR::DCMOTOR(int PWMNumberr, int EQEPNumberr)
-    : motorPWM(PWMNumberr, 999999, 0), motorEQEP(EQEPNumberr) {
+DCMOTOR::DCMOTOR(int PWMNumberr, int EQEPNumberr, int GPIONumberHigh,
+                 int GPIONumberLow)
+    : motorPWM(PWMNumberr, 1000000, 0), motorEQEP(EQEPNumberr),
+      motorHighGPIO(GPIONumberHigh, "out"), motorLowGPIO(GPIONumberLow, "out") {
   // the commands above with : pwmconstructor, eqepconstructor are called an
   // initializer list. We used to initialize the member variables, especially
   // when they are a instances of our own classes
@@ -9,6 +11,8 @@ DCMOTOR::DCMOTOR(int PWMNumberr, int EQEPNumberr)
   setk_emf(0);
   // We now unenable the motor
   enable(0);
+  // Set the direction to the default direction.
+  setDirection(1);
   // and are done with the constructor.
 }
 int DCMOTOR::getAngle() {
@@ -21,7 +25,7 @@ int DCMOTOR::getPWMPeriod() {
   return motorPWM.getPeriod(); // get the pwm period from the pwm object
 }
 void DCMOTOR::setPWMDutyCycle(int DutyCyclee) {
-  int DutyCycleActual = int(DutyCyclee/100.0*getPWMPeriod());
+  int DutyCycleActual = int(DutyCyclee / 100.0 * getPWMPeriod());
   motorPWM.setDutyCycle(DutyCycleActual);
 }
 int DCMOTOR::getPWMDutyCycle() {
@@ -32,10 +36,23 @@ double DCMOTOR::getk_emf() { return k_emf; }
 double DCMOTOR::setk_trq(double k_trqq) { k_trq = k_trqq; }
 double DCMOTOR::getk_trq() { return k_trq; }
 void DCMOTOR::enable(int enablee) {
-  if (enablee != 0) { // so long as the input is not zero, we accept it as enable
+  if (enablee !=
+      0) { // so long as the input is not zero, we accept it as enable
     enablee = 1;
   }
   motorPWM.enable(enablee);
 }
+void DCMOTOR::setDirection(int directionn) {
+  if (direcionn == -1) {
+    motorHighGPIO.setValue(0);
+    motorLowGPIO.setValue(1);
+  } else if (directionn = 1) {
+    motorLowGPIO.setValue(0);
+    motorHighGPIO.setValue(1);
+  }
+  else{
+    // We could do something, but not needed for now.
+  }
 
-
+  }
+}
