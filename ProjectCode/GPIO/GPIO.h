@@ -17,7 +17,6 @@ class GPIO {
   std::string GPIOFile;
   std::string GPIOValueFile;
   std::string GPIODirectionFile;
-  FILE* fileHandle;
 
  public:
   GPIO(int gpioPinNumberr, std::string directionn);

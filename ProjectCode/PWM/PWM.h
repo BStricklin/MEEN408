@@ -21,7 +21,6 @@ class PWM {
   std::string PWMDutyCycleFile;
   std::string PWMPolarityFile;
   std::string PWMEnableFile;
-  FILE* fileHandle;
 
  public:
   PWM(int PWMNumberr, int Periodd, int DutyCyclee);

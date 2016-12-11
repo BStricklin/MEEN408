@@ -72,7 +72,8 @@ void GPIO::setValue(int valuee) {
     std::cout << "Cannot set the GPIO Value.";
     // throw exception;
   } else {
-    ofs << valuee;
+    value = valuee;
+    ofs << value;
     ofs.close();
   }
 }
