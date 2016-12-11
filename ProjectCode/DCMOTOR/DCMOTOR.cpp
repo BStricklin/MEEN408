@@ -15,22 +15,22 @@ int DCMOTOR::getAngle() {
   return motorEQEP.readPosition(); // return the current EQEP position.
 }
 void DCMOTOR::setPWMPeriod(int Periodd) {
-  motorPWM.setPWMPeriod(Periodd); // set the pwm period in the pwm object
+  motorPWM.setPeriod(Periodd); // set the pwm period in the pwm object
 }
 int DCMOTOR::getPWMPeriod() {
-  return motorPWM.getPWMPeriod(); // get the pwm period from the pwm object
+  return motorPWM.getPeriod(); // get the pwm period from the pwm object
 }
 void DCMOTOR::setPWMDutyCycle(int DutyCyclee) {
   int DutyCycleActual = int(DutyCyclee*1.0*getPWMDutyCycle());
-  motorPWM.setPWMDutyCycle(DutyCycleActual);
+  motorPWM.setDutyCycle(DutyCycleActual);
 }
 int DCMOTOR::getPWMDutyCycle() {
-  return motorPWM.getPWMDutyCycle(); // same as getPWMPeriod above
+  return motorPWM.getDutyCycle(); // same as getPWMPeriod above
 }
-double setk_emf(double k_emff) { k_emf = k_emff; }
-double getk_emf() { return k_emf; }
-double setk_trq(double k_trqq) { k_trq = k_trqq; }
-double getk_trq() { return k_trq; }
+double DCMOTOR::setk_emf(double k_emff) { k_emf = k_emff; }
+double DCMOTOR::getk_emf() { return k_emf; }
+double DCMOTOR::setk_trq(double k_trqq) { k_trq = k_trqq; }
+double DCMOTOR::getk_trq() { return k_trq; }
 void DCMOTOR::enable(int enablee) {
   if (enablee != 0) { // so long as the input is not zero, we accept it as enable
     enablee = 1;
