@@ -1,6 +1,9 @@
 #include "DCMOTOR_CONTROLLER.h"
 
-DCMOTOR_CONTROLLER::DCMOTOR_CONTROLLER(float k_pp, float k_dd, float k_ii, int PWMNumberr, int Periodd, int DutyCyclee, int EQEPNumberr) :{
+DCMOTOR_CONTROLLER::DCMOTOR_CONTROLLER(float k_pp, float k_dd, float k_ii,
+                                       int PWMNumberr, int Periodd,
+                                       int DutyCyclee, int EQEPNumberr)
+    : {
   // check validity of inputs
   k_p = k_pp;
   k_d = k_dd;
@@ -9,7 +12,7 @@ DCMOTOR_CONTROLLER::DCMOTOR_CONTROLLER(float k_pp, float k_dd, float k_ii, int P
   EQEP my EQEP(EQEPNumberr);
 };
 
-DCMOTOR_CONTROLLER::~DCMOTOR_CONTROLLER() {
+DCMOTOR_CONTROLLER::~DCMOTOR_CONTROLLER(){
 
 };
 

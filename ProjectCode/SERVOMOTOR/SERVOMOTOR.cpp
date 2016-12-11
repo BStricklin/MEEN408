@@ -18,10 +18,6 @@ void SERVOMOTOR::setAngle(int Anglee) {
   }
 }
 
-SERVOMOTOR::void gripperOpen() {
-  servoPWM.setPWMDutyCycle(upper_limit)
-}
+SERVOMOTOR::void gripperOpen() { servoPWM.setPWMDutyCycle(upper_limit) }
 
-SERVOMOTOR::void gripperClose() {
-  servoPWM.setPWMDutyCycle(lower_limit)
-}
+SERVOMOTOR::void gripperClose() { servoPWM.setPWMDutyCycle(lower_limit) }

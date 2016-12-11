@@ -1,15 +1,15 @@
 #ifndef DCMOTOR_CONTROLLER_H
 #define DCMOTOR_CONTROLLER_H
 
-#include "DCMOTOR.h"
+#include <unistd.h>
 #include <fstream>
 #include <iostream>
 #include <sstream>
 #include <string>
-#include <unistd.h>
+#include "DCMOTOR.h"
 
 class DCMOTOR_CONTROLLER {
-private:
+ private:
   // Controller parameters
   double e;
   double e_i;
@@ -26,7 +26,7 @@ private:
   // DC Motor
   DCMOTOR motor;
 
-public:
+ public:
   DCMOTOR_CONTROLLER();
   ~DCMOTOR_CONTROLLER();
   void run();

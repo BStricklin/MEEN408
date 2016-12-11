@@ -8,13 +8,13 @@ EQEP::EQEP(int EQEPNumberr) {
   // Set filename strings
   std::stringstream ss;
   ss << "/sys/devices/platform/ocp/48304000.epwmss/48304180.eqep/";  // DeviceFile
-  EQEPDeviceFile = ss.str();                   //
-  ss.clear();                                 //
-  ss.str(std::string());                      //
+  EQEPDeviceFile = ss.str();                                         //
+  ss.clear();                                                        //
+  ss.str(std::string());                                             //
   ss << EQEPDeviceFile << "position";  // PositionFile
-  EQEPPositionFile = ss.str();  //
-  ss.clear();                 //
-  ss.str(std::string());      //
+  EQEPPositionFile = ss.str();         //
+  ss.clear();                          //
+  ss.str(std::string());               //
 }
 
 int EQEP::readPosition() {

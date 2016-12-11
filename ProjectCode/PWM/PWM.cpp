@@ -29,20 +29,20 @@ PWM::PWM(int PWMNumberr, int Periodd, int DutyCyclee) {
   ss.str(std::string());                                    //
 
   // Check if the PWM device is in slots
-  std::string PWMSlots =  "/sys/devices/platform/bone_capemgr/slots";
+  std::string PWMSlots = "/sys/devices/platform/bone_capemgr/slots";
   std::ofstream ofs;
-/*  ofs.open(PWMSlots.c_str(),
-           std::ios::app);
-  if (!(ofs.is_open())) {
-    std::cout << "Cannot export the PWM Device to Slots\n";
-    // throw exception;
-  } else {
-    ofs << "BB-PWM2";  // write pin number to export file
-    std::cout << "Wrote to Slots" << std::endl;
-    //usleep(100000);
-    ofs.close(); // and close the file
-  }
-*/
+  /*  ofs.open(PWMSlots.c_str(),
+             std::ios::app);
+    if (!(ofs.is_open())) {
+      std::cout << "Cannot export the PWM Device to Slots\n";
+      // throw exception;
+    } else {
+      ofs << "BB-PWM2";  // write pin number to export file
+      std::cout << "Wrote to Slots" << std::endl;
+      //usleep(100000);
+      ofs.close(); // and close the file
+    }
+  */
   // Export the PWM  Number (this will make the pwm directory we can then use)
   ofs.open(std::string("/sys/class/pwm/pwmchip0/export").c_str(),
            std::ios::app);
@@ -51,9 +51,9 @@ PWM::PWM(int PWMNumberr, int Periodd, int DutyCyclee) {
     // throw exception;
   } else {
     ofs << PWMNumber;  // write pin number to export file
-    ofs.close(); //and close the file  
+    ofs.close();       // and close the file
     std::cout << "Exported PWM pin." << std::endl;
-}
+  }
 
   // Disable pin
   enable(0);
@@ -92,7 +92,7 @@ void PWM::setPeriod(int Periodd) {
     ofs << Period;
     ofs.close();
     std::cout << "Period Set." << std::endl;
-}
+  }
 }
 
 void PWM::setDutyCycle(int DutyCyclee) {
@@ -117,8 +117,8 @@ void PWM::setPolarity(std::string Polarityy) {
   } else {
     Polarity = Polarityy;
     ofs << Polarityy;
-    ofs.close(); 
- }
+    ofs.close();
+  }
 }
 void PWM::enable(int enablee) {
   std::ofstream ofs;
@@ -129,8 +129,8 @@ void PWM::enable(int enablee) {
   } else {
     Enabled = enablee;
     ofs << enablee;
-   ofs.close();  
-}
+    ofs.close();
+  }
 }
 
 int PWM::getPeriod() {
