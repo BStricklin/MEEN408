@@ -38,6 +38,7 @@ PWM::PWM(int PWMNumberr, int Periodd, int DutyCyclee) {
     // throw exception;
   } else {
     ofs << "BB-PWM2";  // write pin number to export file
+    //usleep(100000);
   }
   ofs.close();  // and close the file
 

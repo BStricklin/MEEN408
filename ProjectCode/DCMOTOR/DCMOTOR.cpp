@@ -2,8 +2,9 @@
 
 DCMOTOR::DCMOTOR(int PWMNumberr, int EQEPNumberr, int GPIONumberHigh,
                  int GPIONumberLow)
-    : motorPWM(PWMNumberr, 1000000, 0), motorEQEP(EQEPNumberr),
-      motorHighGPIO(GPIONumberHigh, "out"), motorLowGPIO(GPIONumberLow, "out") {
+    : motorPWM(PWMNumberr, 1000000, 0), motorEQEP(EQEPNumberr)//,
+      // motorHighGPIO(GPIONumberHigh, "out"), motorLowGPIO(GPIONumberLow, "out")
+{
   // the commands above with : pwmconstructor, eqepconstructor are called an
   // initializer list. We used to initialize the member variables, especially
   // when they are a instances of our own classes
@@ -12,7 +13,9 @@ DCMOTOR::DCMOTOR(int PWMNumberr, int EQEPNumberr, int GPIONumberHigh,
   // We now unenable the motor
   enable(0);
   // Set the direction to the default direction.
-  setDirection(1);
+  std::cout << "About to set direction." << std::endl;
+  //  setDirection(1);
+  std::cout << "Direction has been set." << std::endl;
   // and are done with the constructor.
 }
 int DCMOTOR::getAngle() {
