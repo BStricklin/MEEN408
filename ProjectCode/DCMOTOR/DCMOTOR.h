@@ -1,8 +1,8 @@
 #ifndef DCMOTOR_H
 #define DCMOTOR_H
 
-#include "EQEP.h"
-#include "PWM.h"
+#include "../EQEP/EQEP.h"
+#include "../PWM/PWM.h"
 #include <fstream>
 #include <iostream>
 #include <sstream>
