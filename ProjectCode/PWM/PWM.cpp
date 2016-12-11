@@ -4,7 +4,7 @@ PWM::PWM(int PWMNumberr, int Periodd, int DutyCyclee) {
   // check that inputs are valid - for now we assume they are valid
   // Set internal port parameters
   PWMNumber = PWMNumberr;
-  std::cout << "PWM Constructor\n.";
+  std::cout << "PWM Constructor Start\n.";
   // Set filename strings
   std::stringstream ss;
   ss << "/sys/class/pwm/pwmchip0/pwm" << PWMNumber << "/";  // PWMFile
@@ -59,6 +59,7 @@ PWM::PWM(int PWMNumberr, int Periodd, int DutyCyclee) {
   // Set Period and Duty Cycle
   setPeriod(Periodd);
   setDutyCycle(DutyCyclee);
+  std::cout << "PWM Constructor End." << std::endlAp;
 }
 
 PWM::~PWM() {
