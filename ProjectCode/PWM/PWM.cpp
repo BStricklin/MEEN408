@@ -4,7 +4,7 @@ PWM::PWM(int PWMNumberr, int Periodd, int DutyCyclee) {
   // check that inputs are valid - for now we assume they are valid
   // Set internal port parameters
   PWMNumber = PWMNumberr;
-
+  std::cout << "PWM Constructor Start\n.";
   // Set filename strings
   std::stringstream ss;
   ss << "/sys/class/pwm/pwmchip0/pwm" << PWMNumber << "/";  // PWMFile
@@ -31,16 +31,18 @@ PWM::PWM(int PWMNumberr, int Periodd, int DutyCyclee) {
   // Check if the PWM device is in slots
   std::string PWMSlots =  "/sys/devices/platform/bone_capemgr/slots";
   std::ofstream ofs;
-  ofs.open(PWMSlots.c_str(),
+/*  ofs.open(PWMSlots.c_str(),
            std::ios::app);
   if (!(ofs.is_open())) {
     std::cout << "Cannot export the PWM Device to Slots\n";
     // throw exception;
   } else {
     ofs << "BB-PWM2";  // write pin number to export file
+    std::cout << "Wrote to Slots" << std::endl;
+    //usleep(100000);
+    ofs.close(); // and close the file
   }
-  ofs.close();  // and close the file
-
+*/
   // Export the PWM  Number (this will make the pwm directory we can then use)
   ofs.open(std::string("/sys/class/pwm/pwmchip0/export").c_str(),
            std::ios::app);
@@ -49,15 +51,19 @@ PWM::PWM(int PWMNumberr, int Periodd, int DutyCyclee) {
     // throw exception;
   } else {
     ofs << PWMNumber;  // write pin number to export file
-  }
-  ofs.close();  // and close the file
+    ofs.close(); //and close the file  
+    std::cout << "Exported PWM pin." << std::endl;
+}
 
   // Disable pin
   enable(0);
 
   // Set Period and Duty Cycle
+  std::cout << "Setting Period and Duty Cycle." << std::endl;
   setPeriod(Periodd);
   setDutyCycle(DutyCyclee);
+  std::cout << "Period and Duty Cycle set." << std::endl;
+  std::cout << "PWM Constructor End." << std::endl;
 }
 
 PWM::~PWM() {
@@ -84,8 +90,9 @@ void PWM::setPeriod(int Periodd) {
   } else {
     Period = Periodd;
     ofs << Period;
-  }
-  ofs.close();
+    ofs.close();
+    std::cout << "Period Set." << std::endl;
+}
 }
 
 void PWM::setDutyCycle(int DutyCyclee) {
@@ -97,8 +104,8 @@ void PWM::setDutyCycle(int DutyCyclee) {
   } else {
     DutyCycle = DutyCyclee;
     ofs << DutyCyclee;
+    ofs.close();
   }
-  ofs.close();
 }
 
 void PWM::setPolarity(std::string Polarityy) {
@@ -110,8 +117,8 @@ void PWM::setPolarity(std::string Polarityy) {
   } else {
     Polarity = Polarityy;
     ofs << Polarityy;
-  }
-  ofs.close();
+    ofs.close(); 
+ }
 }
 void PWM::enable(int enablee) {
   std::ofstream ofs;
@@ -122,8 +129,8 @@ void PWM::enable(int enablee) {
   } else {
     Enabled = enablee;
     ofs << enablee;
-  }
-  ofs.close();
+   ofs.close();  
+}
 }
 
 int PWM::getPeriod() {
