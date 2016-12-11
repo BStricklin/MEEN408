@@ -43,12 +43,14 @@ void DCMOTOR::enable(int enablee) {
   motorPWM.enable(enablee);
 }
 void DCMOTOR::setDirection(int directionn) {
-  if (direcionn == -1) {
+  if (directionn == -1) {
     motorHighGPIO.setValue(0);
     motorLowGPIO.setValue(1);
+    direction = directionn;
   } else if (directionn = 1) {
     motorLowGPIO.setValue(0);
     motorHighGPIO.setValue(1);
+    direction = directionn;
   }
   else{
     // We could do something, but not needed for now.
