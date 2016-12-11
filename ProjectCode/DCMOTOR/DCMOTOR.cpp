@@ -51,10 +51,7 @@ void DCMOTOR::setDirection(int directionn) {
     motorLowGPIO.setValue(0);
     motorHighGPIO.setValue(1);
     direction = directionn;
-  }
-  else{
+  } else {
     // We could do something, but not needed for now.
-  }
-
   }
 }
