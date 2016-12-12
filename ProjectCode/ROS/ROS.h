@@ -10,6 +10,7 @@
 
 class ROS {
 private:
+  ros::Rate loop_rate(10)
 
 
 public:
