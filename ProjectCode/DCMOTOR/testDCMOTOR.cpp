@@ -13,7 +13,7 @@ int main() {
  for (int i = 0; i < 10; i++){
   // Start of Turn One
   myDCMOTOR.enable(0);
-  myDCMOTOR.setPWMDutyCycle(50);
+  myDCMOTOR.setPWMDutyCycle(75);
   myDCMOTOR.setDirection(1);
   cout << "Start Turn     " << endl;
   cout << "Angle:   " << myDCMOTOR.getAngle() << endl;
@@ -26,7 +26,7 @@ int main() {
   // End of Turn One
 
   // Start of Turn Two
-  myDCMOTOR.setPWMDutyCycle(50);
+  myDCMOTOR.setPWMDutyCycle(75);
   myDCMOTOR.setDirection(-1);
   cout << "\nStart Turn     " << endl;
   cout << "Angle:   " << myDCMOTOR.getAngle() << endl;
