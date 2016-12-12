@@ -38,3 +38,5 @@ int main() {
   cout << "Angle:   " << myDCMOTOR.getAngle() << endl;
   usleep(500000);
 }
+
+}
