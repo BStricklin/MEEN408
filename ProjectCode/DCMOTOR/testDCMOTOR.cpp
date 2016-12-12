@@ -10,6 +10,7 @@ int main() {
   int check = 0;
   cin >> check;
 
+ for (int i = 0; i < 10; i++){
   // Start of Turn One
   myDCMOTOR.enable(0);
   myDCMOTOR.setPWMDutyCycle(50);
@@ -17,7 +18,7 @@ int main() {
   cout << "Start Turn     " << endl;
   cout << "Angle:   " << myDCMOTOR.getAngle() << endl;
   myDCMOTOR.enable(1);
-  usleep(500000);
+  usleep(800000);
   myDCMOTOR.enable(0);
   usleep(500000);
   cout << "End Turn     " << endl;
@@ -30,9 +31,10 @@ int main() {
   cout << "\nStart Turn     " << endl;
   cout << "Angle:   " << myDCMOTOR.getAngle() << endl;
   myDCMOTOR.enable(1);
-  usleep(500000);
+  usleep(800000);
   myDCMOTOR.enable(0);
   usleep(500000);
   cout << "End Turn        " << endl;
   cout << "Angle:   " << myDCMOTOR.getAngle() << endl;
+  usleep(500000);
 }
