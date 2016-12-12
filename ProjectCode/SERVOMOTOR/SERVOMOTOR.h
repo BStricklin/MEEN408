@@ -23,6 +23,7 @@ public:
   void setAngle(int Anglee);
   void gripperOpen();
   void gripperClose();
+  ~SERVOMOTOR();
 };
 
 #endif

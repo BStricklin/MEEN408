@@ -54,7 +54,9 @@ PWM::PWM(int PWMNumberr, int Periodd, int DutyCyclee) {
   } else {
     ofs << PWMNumber; // write pin number to export file
     ofs.close();      // and close the file
+    int dummy;
     std::cout << "Exported PWM pin." << std::endl;
+    std::cin >> dummy;
   }
   // Disable pin Control
   enable(0);
@@ -123,14 +125,6 @@ void PWM::setPolarity(std::string Polarityy) {
 void PWM::enable(int enablee) {
   // First we truly disable the PWM if we unenable by setting duty cycle to
   // zero.
-  if (enablee == 0) {
-    int temp = DutyCycle;
-    setDutyCycle(0);
-    DutyCycle = temp;
-  } else if (enablee == 1) // otherwise reactivate PWM before enabling
-  {
-    setDutyCycle(DutyCycle);
-  }
   std::ofstream ofs;
   ofs.open(PWMEnableFile.c_str(), std::ios::trunc);
   if (!(ofs.is_open())) {
@@ -140,6 +134,14 @@ void PWM::enable(int enablee) {
     Enabled = enablee;
     ofs << enablee;
     ofs.close();
+  }
+  if (enablee == 0) {
+    int temp = DutyCycle;
+    setDutyCycle(0);
+    DutyCycle = temp;
+  } else if (enablee == 1) // otherwise reactivate PWM before enabling
+  {
+    setDutyCycle(DutyCycle);
   }
 }
 

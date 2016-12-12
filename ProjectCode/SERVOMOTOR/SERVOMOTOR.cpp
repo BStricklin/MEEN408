@@ -2,8 +2,8 @@
 
 SERVOMOTOR::SERVOMOTOR(int PWMNumberr)
  : servoPWM(PWMNumberr, 20000000, 0) {
-  lower_limit=1000000;
-  upper_limit=1400000;
+  lower_limit=1100000;
+  upper_limit=1500000;
   theta_low=0;
   theta_high=90;
 }
@@ -24,6 +24,14 @@ void SERVOMOTOR::setAngle(int Anglee) {
   }
 }
 
-void SERVOMOTOR::gripperOpen() { servoPWM.setDutyCycle(upper_limit); }
+void SERVOMOTOR::gripperOpen() {
+  servoPWM.enable(1);
+  servoPWM.setDutyCycle(upper_limit); }
 
-void SERVOMOTOR::gripperClose() { servoPWM.setDutyCycle(lower_limit); }
+void SERVOMOTOR::gripperClose() {
+  servoPWM.enable(1);
+  servoPWM.setDutyCycle(lower_limit); }
+
+SERVOMOTOR::~SERVOMOTOR() {
+  servoPWM.setDutyCycle(upper_limit);
+  servoPWM.enable(0); }
