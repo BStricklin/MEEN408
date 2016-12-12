@@ -1,7 +1,7 @@
 #ifndef SERVOMOTOR_H
 #define SERVOMOTOR_H
 
-#include "PWM.h"
+#include "../PWM/PWM.h"
 #include <fstream>
 #include <iostream>
 #include <sstream>
@@ -12,13 +12,13 @@ class SERVOMOTOR {
 private:
   PWM servoPWM; // pwm which will send control signal to servomotor
   int Angle;
-  int lower_limit = 1000000;
-  int upper_limit = 1400000;
-  int theta_low = 0;
-  int theta_high = 90;
+  int lower_limit;
+  int upper_limit;
+  int theta_low;
+  int theta_high;
 
 public:
-  SERVOMOTOR();
+  SERVOMOTOR(int PWMNumberr);
   //  int getAngle();
   void setAngle(int Anglee);
   void gripperOpen();

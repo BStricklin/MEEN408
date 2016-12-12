@@ -5,7 +5,7 @@
 using namespace std;
 int main() {
   cout << " Will this do anything at all?" << endl;
-  DCMOTOR myDCMOTOR(0, 2, 30, 60);
+  SERVOMOTOR mySERVO(0, 2, 30, 60);
   cout << "About to start test file" << endl;
   int check = 0;
   cin >> check;

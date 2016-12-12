@@ -4,6 +4,8 @@ PWM::PWM(int PWMNumberr, int Periodd, int DutyCyclee) {
   // check that inputs are valid - for now we assume they are valid
   // Set internal port parameters
   PWMNumber = PWMNumberr;
+  DutyCycle = DutyCyclee;
+  Period = Periodd;
   std::cout << "PWM Constructor Start\n.";
   // Set filename strings
   std::stringstream ss;
@@ -54,10 +56,8 @@ PWM::PWM(int PWMNumberr, int Periodd, int DutyCyclee) {
     ofs.close();      // and close the file
     std::cout << "Exported PWM pin." << std::endl;
   }
-
-  // Disable pin
+  // Disable pin Control
   enable(0);
-
   // Set Period and Duty Cycle
   std::cout << "Setting Period and Duty Cycle." << std::endl;
   setPeriod(Periodd);
@@ -121,6 +121,16 @@ void PWM::setPolarity(std::string Polarityy) {
   }
 }
 void PWM::enable(int enablee) {
+  // First we truly disable the PWM if we unenable by setting duty cycle to
+  // zero.
+  if (enablee == 0) {
+    int temp = DutyCycle;
+    setDutyCycle(0);
+    DutyCycle = temp;
+  } else if (enablee == 1) // otherwise reactivate PWM before enabling
+  {
+    setDutyCycle(DutyCycle);
+  }
   std::ofstream ofs;
   ofs.open(PWMEnableFile.c_str(), std::ios::trunc);
   if (!(ofs.is_open())) {
