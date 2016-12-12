@@ -12,7 +12,9 @@ DCMOTOR::DCMOTOR(int PWMNumberr, int EQEPNumberr, int GPIONumberHigh,
   // We now unenable the motor
   enable(0);
   // Set the direction to the default direction.
+  std::cout << "About to set direction." << std::endl;
   setDirection(1);
+  std::cout << "Direction has been set." << std::endl;
   // and are done with the constructor.
 }
 int DCMOTOR::getAngle() {
@@ -41,6 +43,7 @@ void DCMOTOR::enable(int enablee) {
     enablee = 1;
   }
   motorPWM.enable(enablee);
+  motorOn = 1;
 }
 void DCMOTOR::setDirection(int directionn) {
   if (directionn == -1) {

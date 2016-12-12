@@ -7,6 +7,7 @@ GPIO::GPIO(int gpioPinNumberr, std::string directionn) {
     // throw exception;
   }
   // Set internal port parameters
+  std::cout << "GPIO Constuctor.\n";
   gpioPinNumber = gpioPinNumberr;
   direction = directionn;
   // Set file strings
@@ -36,8 +37,8 @@ GPIO::GPIO(int gpioPinNumberr, std::string directionn) {
     // throw exception;
   } else {
     // If connecting to the export file works, we export the pin number.
-    ofs << gpioPinNumber;  // write pin number to export file
-    ofs.close();           // and close the file
+    ofs << gpioPinNumber; // write pin number to export file
+    ofs.close();          // and close the file
   }
 
   // Set the pin direction
@@ -60,8 +61,8 @@ GPIO::~GPIO() {
     // throw exception;
   } else {
     // If connecting to the export file works, we export the pin number.
-    ofs << gpioPinNumber;  // write pin number to export file
-    ofs.close();           // and close the file
+    ofs << gpioPinNumber; // write pin number to export file
+    ofs.close();          // and close the file
   }
 }
 

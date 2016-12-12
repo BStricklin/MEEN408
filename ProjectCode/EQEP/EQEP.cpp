@@ -4,17 +4,17 @@ EQEP::EQEP(int EQEPNumberr) {
   // check that inputs are valid - for now we assume they are valid
   // Set internal port parameters
   EQEPNumber = EQEPNumberr;
-
+  std::cout << "EQEP Constructor.\n";
   // Set filename strings
   std::stringstream ss;
-  ss << "/sys/devices/platform/ocp/48304000.epwmss/48304180.eqep/";  // DeviceFile
-  EQEPDeviceFile = ss.str();                   //
-  ss.clear();                                 //
-  ss.str(std::string());                      //
-  ss << EQEPDeviceFile << "position";  // PositionFile
-  EQEPPositionFile = ss.str();  //
-  ss.clear();                 //
-  ss.str(std::string());      //
+  ss << "/sys/devices/platform/ocp/48304000.epwmss/48304180.eqep/"; // DeviceFile
+  EQEPDeviceFile = ss.str();                                        //
+  ss.clear();                                                       //
+  ss.str(std::string());                                            //
+  ss << EQEPDeviceFile << "position"; // PositionFile
+  EQEPPositionFile = ss.str();        //
+  ss.clear();                         //
+  ss.str(std::string());              //
 }
 
 int EQEP::readPosition() {

@@ -1,14 +1,14 @@
 #ifndef GPIO_H
 #define GPIO_H
 
-#include <unistd.h>
 #include <fstream>
 #include <iostream>
 #include <sstream>
 #include <string>
+#include <unistd.h>
 
 class GPIO {
- private:
+private:
   // port parameters
   int gpioPinNumber;
   std::string direction;
@@ -18,7 +18,7 @@ class GPIO {
   std::string GPIOValueFile;
   std::string GPIODirectionFile;
 
- public:
+public:
   GPIO(int gpioPinNumberr, std::string directionn);
   ~GPIO();
   void setValue(int Valuee);

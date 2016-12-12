@@ -10,7 +10,7 @@
 
 class SERVOMOTOR {
 private:
-  PWM servoPWM;  // pwm which will send control signal to servomotor
+  PWM servoPWM; // pwm which will send control signal to servomotor
   int Angle;
   int lower_limit = 1000000;
   int upper_limit = 1400000;
@@ -19,7 +19,7 @@ private:
 
 public:
   SERVOMOTOR();
-//  int getAngle();
+  //  int getAngle();
   void setAngle(int Anglee);
   void gripperOpen();
   void gripperClose();
