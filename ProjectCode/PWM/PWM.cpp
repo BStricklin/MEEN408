@@ -1,15 +1,21 @@
 #include "PWM.h"
 
-PWM::PWM(int PWMNumberr, int Periodd, int DutyCyclee) {
+PWM::PWM(int chipNumberr, int PWMNumberr, int Periodd, int DutyCyclee) {
   // check that inputs are valid - for now we assume they are valid
   // Set internal port parameters
   PWMNumber = PWMNumberr;
   DutyCycle = DutyCyclee;
   Period = Periodd;
   std::cout << "PWM Constructor Start\n.";
+  if (!(chipNumberr == 0 || chipNumberr == 2)) {
+    std::cout << "Cannot Access pwmchipx." << std::endl;
+  }
+  if (!(PWMNumberr == 0 || PWMNumberr == 1)){
+    std::cout << "Cannot Access pwmx." << std::endl;
+  }
   // Set filename strings
   std::stringstream ss;
-  ss << "/sys/class/pwm/pwmchip0/pwm" << PWMNumber << "/"; // PWMFile
+  ss << "/sys/class/pwm/pwmchip" << chipNumberr << "/pwm" << PWMNumber << "/"; // PWMFile
   PWMFile = ss.str();                                      //
   ss.clear();                                              //
   ss.str(std::string());                                   //

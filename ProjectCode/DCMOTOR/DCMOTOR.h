@@ -28,7 +28,7 @@ private:
                  // install the motor
 
 public:
-  DCMOTOR(int PWMNumberr, int EQEPNumberr, int GPIONumberHigh,
+  DCMOTOR(int PWMChipNumberr, int PWMNumberr, int EQEPNumberr, int GPIONumberHigh,
           int GPIONumberLow);
   //~DCMOTOR();
   int getAngle();

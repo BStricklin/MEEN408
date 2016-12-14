@@ -23,7 +23,7 @@ private:
   std::string PWMEnableFile;
 
 public:
-  PWM(int PWMNumberr, int Periodd, int DutyCyclee);
+  PWM(int chipNumberr, int PWMNumberr, int Periodd, int DutyCyclee);
   ~PWM();
   void setPeriod(int Periodd);
   void setDutyCycle(int DutyCyclee);

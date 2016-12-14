@@ -1,8 +1,8 @@
 #include "DCMOTOR.h"
 
-DCMOTOR::DCMOTOR(int PWMNumberr, int EQEPNumberr, int GPIONumberHigh,
+DCMOTOR::DCMOTOR(int PWMChipNumberr, int PWMNumberr, int EQEPNumberr, int GPIONumberHigh,
                  int GPIONumberLow)
-    : motorPWM(PWMNumberr, 1000000, 0), motorEQEP(EQEPNumberr),
+    : motorPWM(PWMChipNumberr, PWMNumberr, 1000000, 0), motorEQEP(EQEPNumberr),
       motorHighGPIO(GPIONumberHigh, "out"), motorLowGPIO(GPIONumberLow, "out") {
   // the commands above with : pwmconstructor, eqepconstructor are called an
   // initializer list. We used to initialize the member variables, especially
