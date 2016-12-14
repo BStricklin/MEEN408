@@ -56,7 +56,6 @@ PWM::PWM(int PWMNumberr, int Periodd, int DutyCyclee) {
     ofs.close();      // and close the file
     int dummy;
     std::cout << "Exported PWM pin." << std::endl;
-    std::cin >> dummy;
   }
   // Disable pin Control
   enable(0);
