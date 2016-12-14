@@ -9,12 +9,11 @@
 
 class DC1 {
 private:
-  DCMOTOR myDC1;
-
+  DCMOTOR myDCMOTOR1;
 public:
   DC1(int PWMChipNumberr, int PWMNumberr, int EQEPNumberr, int GPIONumberHigh,
       int GPIONumberLow)
-      : myDC1(PWMChipNumberr, PWMNumberr, EQEPNumberr, GPIONumberHigh,
+      : myDCMOTOR1(PWMChipNumberr, PWMNumberr, EQEPNumberr, GPIONumberHigh,
               GPIONumberLow) {}
   void DC1_Callback(const std_msgs::String::ConstPtr& msg) {
     std::stringstream ss;
@@ -22,7 +21,10 @@ public:
     int temp = 0;
     ss >> temp;
     std::cout << "Setting to " << temp << std::endl;
-    myDC1.setPWMDutyCycle(temp);
+    myDCMOTOR1.setPWMDutyCycle(temp);
+  }
+  int getAngle(){
+      return myDCMOTOR1.getAngle();
   }
 };
 
@@ -40,7 +42,7 @@ int main(int argc, char **argv) {
     std_msgs::String msg;
 
     std::stringstream ss;
-    ss << "Hullo!"; // myDC1.getAngle; <-- deal with that later
+    ss << myDC1.getAngle();
     msg.data = ss.str();
 
     pub.publish(msg);

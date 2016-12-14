@@ -1,4 +1,4 @@
-#include "PWM.h"
+#include <project/PWM.h>
 
 PWM::PWM(int chipNumberr, int PWMNumberr, int Periodd, int DutyCyclee) {
   // check that inputs are valid - for now we assume they are valid
@@ -10,33 +10,35 @@ PWM::PWM(int chipNumberr, int PWMNumberr, int Periodd, int DutyCyclee) {
   if (!(chipNumberr == 0 || chipNumberr == 2)) {
     std::cout << "Cannot Access pwmchipx." << std::endl;
   }
-  if (!(PWMNumberr == 0 || PWMNumberr == 1)){
+  if (!(PWMNumberr == 0 || PWMNumberr == 1)) {
     std::cout << "Cannot Access pwmx." << std::endl;
   }
   // Set filename strings
   std::stringstream ss;
-  ss << "/sys/class/pwm/pwmchip" << chipNumberr << "/pwm" << PWMNumber << "/"; // PWMFile
-  PWMFile = ss.str();                                      //
-  ss.clear();                                              //
-  ss.str(std::string());                                   //
-  ss << PWMFile << "period";                               // PeriodFile
-  PWMPeriodFile = ss.str();                                //
-  ss.clear();                                              //
-  ss.str(std::string());                                   //
-  ss << PWMFile << "duty_cycle";                           // DutyCycleFile
-  PWMDutyCycleFile = ss.str();                             //
-  ss.clear();                                              //
-  ss.str(std::string());                                   //
-  ss << PWMFile << "polarity";                             // PolarityFile
-  PWMPolarityFile = ss.str();                              //
-  ss.clear();                                              //
-  ss.str(std::string());                                   //
-  ss << PWMFile << "enable";                               // EnableFile
-  PWMEnableFile = ss.str();                                //
-  ss.clear();                                              //
-  ss.str(std::string());                                   //
+  ss << "/sys/class/pwm/pwmchip" << chipNumberr << "/pwm" << PWMNumber
+     << "/";                     // PWMFile
+  PWMFile = ss.str();            //
+  ss.clear();                    //
+  ss.str(std::string());         //
+  ss << PWMFile << "period";     // PeriodFile
+  PWMPeriodFile = ss.str();      //
+  ss.clear();                    //
+  ss.str(std::string());         //
+  ss << PWMFile << "duty_cycle"; // DutyCycleFile
+  PWMDutyCycleFile = ss.str();   //
+  ss.clear();                    //
+  ss.str(std::string());         //
+  ss << PWMFile << "polarity";   // PolarityFile
+  PWMPolarityFile = ss.str();    //
+  ss.clear();                    //
+  ss.str(std::string());         //
+  ss << PWMFile << "enable";     // EnableFile
+  PWMEnableFile = ss.str();      //
+  ss.clear();                    //
+  ss.str(std::string());         //
 
   // Check if the PWM device is in slots
+
   std::string PWMSlots = "/sys/devices/platform/bone_capemgr/slots";
   std::ofstream ofs;
   /*  ofs.open(PWMSlots.c_str(),
@@ -52,8 +54,16 @@ PWM::PWM(int chipNumberr, int PWMNumberr, int Periodd, int DutyCyclee) {
     }
   */
   // Export the PWM  Number (this will make the pwm directory we can then use)
-  ofs.open(std::string("/sys/class/pwm/pwmchip0/export").c_str(),
-           std::ios::app);
+  ss << "/sys/class/pwm/pwmchip" << chipNumberr << "/export"; // PWMFile
+  PWMExportFile = ss.str();
+  ss.clear();                                                   //
+  ss.str(std::string());                                        //
+  ss << "/sys/class/pwm/pwmchip" << chipNumberr << "/unexport"; // PWMFile
+  PWMUnexportFile = ss.str();
+  ss.clear();            //
+  ss.str(std::string()); //
+
+  ofs.open(PWMExportFile.c_str(), std::ios::app);
   if (!(ofs.is_open())) {
     std::cout << "Cannot export the PWM Pin\n";
     // throw exception;
@@ -77,8 +87,7 @@ PWM::~PWM() {
   // Unexport the PWM
   setDutyCycle(0);
   std::ofstream ofs;
-  ofs.open(std::string("/sys/class/pwm/pwmchip0/unexport").c_str(),
-           std::ios::app);
+  ofs.open(PWMUnexportFile.c_str(), std::ios::app);
   if (!(ofs.is_open())) {
     std::cout << "Cannot unexport the PWM Pin\n";
     // throw exception;

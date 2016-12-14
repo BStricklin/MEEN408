@@ -26,8 +26,8 @@ void DCMOTOR::setPWMPeriod(int Periodd) {
 int DCMOTOR::getPWMPeriod() {
   return motorPWM.getPeriod(); // get the pwm period from the pwm object
 }
-void DCMOTOR::setPWMDutyCycle(int DutyCyclee) {
-  int DutyCycleActual = int(DutyCyclee / 100.0 * getPWMPeriod());
+void DCMOTOR::setPWMDutyCycle(double DutyFractionn) {
+  int DutyCycleActual = int( DutyFractionn / 100.0 * getPWMPeriod());
   motorPWM.setDutyCycle(DutyCycleActual);
 }
 int DCMOTOR::getPWMDutyCycle() {

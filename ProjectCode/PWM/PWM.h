@@ -21,6 +21,8 @@ private:
   std::string PWMDutyCycleFile;
   std::string PWMPolarityFile;
   std::string PWMEnableFile;
+  std::string PWMExportFile;
+  std::string PWMUnexportFile;
 
 public:
   PWM(int chipNumberr, int PWMNumberr, int Periodd, int DutyCyclee);

@@ -1,7 +1,7 @@
 #include "SERVOMOTOR.h"
 
 SERVOMOTOR::SERVOMOTOR(int PWMNumberr)
- : servoPWM(PWMNumberr, 20000000, 0) {
+ : servoPWM(2, PWMNumberr, 20000000, 0) {
   lower_limit=1100000;
   upper_limit=1500000;
   theta_low=0;

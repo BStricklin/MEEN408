@@ -34,7 +34,7 @@ public:
   int getAngle();
   void setPWMPeriod(int Periodd);
   int getPWMPeriod();
-  void setPWMDutyCycle(int DutyCyclee);
+  void setPWMDutyCycle(double DutyCyclee);
   int getPWMDutyCycle();
   double setk_emf(double k_emff);
   double getk_emf();
