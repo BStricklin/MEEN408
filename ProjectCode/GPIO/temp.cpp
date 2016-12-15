@@ -1,7 +1,7 @@
-#include "GPIO.h"
+#include <unistd.h>
 #include <iostream>
 #include <string>
-#include <unistd.h>
+#include "GPIO.h"
 
 int main() {
   GPIO myGPIO(60, "out");

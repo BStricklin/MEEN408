@@ -1,14 +1,15 @@
+// Augustus Ellis
 #ifndef PWM_H
 #define PWM_H
 
+#include <unistd.h>
 #include <fstream>
 #include <iostream>
 #include <sstream>
 #include <string>
-#include <unistd.h>
 
 class PWM {
-private:
+ private:
   // PWM parameters
   int Period;
   int DutyCycle;
@@ -24,7 +25,7 @@ private:
   std::string PWMExportFile;
   std::string PWMUnexportFile;
 
-public:
+ public:
   PWM(int chipNumberr, int PWMNumberr, int Periodd, int DutyCyclee);
   ~PWM();
   void setPeriod(int Periodd);

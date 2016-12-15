@@ -1,3 +1,4 @@
+// Author: Augustus Ellis
 #include <project/PWM.h>
 
 PWM::PWM(int chipNumberr, int PWMNumberr, int Periodd, int DutyCyclee) {
@@ -16,26 +17,26 @@ PWM::PWM(int chipNumberr, int PWMNumberr, int Periodd, int DutyCyclee) {
   // Set filename strings
   std::stringstream ss;
   ss << "/sys/class/pwm/pwmchip" << chipNumberr << "/pwm" << PWMNumber
-     << "/";                     // PWMFile
-  PWMFile = ss.str();            //
-  ss.clear();                    //
-  ss.str(std::string());         //
-  ss << PWMFile << "period";     // PeriodFile
-  PWMPeriodFile = ss.str();      //
-  ss.clear();                    //
-  ss.str(std::string());         //
-  ss << PWMFile << "duty_cycle"; // DutyCycleFile
-  PWMDutyCycleFile = ss.str();   //
-  ss.clear();                    //
-  ss.str(std::string());         //
-  ss << PWMFile << "polarity";   // PolarityFile
-  PWMPolarityFile = ss.str();    //
-  ss.clear();                    //
-  ss.str(std::string());         //
-  ss << PWMFile << "enable";     // EnableFile
-  PWMEnableFile = ss.str();      //
-  ss.clear();                    //
-  ss.str(std::string());         //
+     << "/";                      // PWMFile
+  PWMFile = ss.str();             //
+  ss.clear();                     //
+  ss.str(std::string());          //
+  ss << PWMFile << "period";      // PeriodFile
+  PWMPeriodFile = ss.str();       //
+  ss.clear();                     //
+  ss.str(std::string());          //
+  ss << PWMFile << "duty_cycle";  // DutyCycleFile
+  PWMDutyCycleFile = ss.str();    //
+  ss.clear();                     //
+  ss.str(std::string());          //
+  ss << PWMFile << "polarity";    // PolarityFile
+  PWMPolarityFile = ss.str();     //
+  ss.clear();                     //
+  ss.str(std::string());          //
+  ss << PWMFile << "enable";      // EnableFile
+  PWMEnableFile = ss.str();       //
+  ss.clear();                     //
+  ss.str(std::string());          //
 
   // Check if the PWM device is in slots
 
@@ -54,22 +55,22 @@ PWM::PWM(int chipNumberr, int PWMNumberr, int Periodd, int DutyCyclee) {
     }
   */
   // Export the PWM  Number (this will make the pwm directory we can then use)
-  ss << "/sys/class/pwm/pwmchip" << chipNumberr << "/export"; // PWMFile
+  ss << "/sys/class/pwm/pwmchip" << chipNumberr << "/export";  // PWMFile
   PWMExportFile = ss.str();
-  ss.clear();                                                   //
-  ss.str(std::string());                                        //
-  ss << "/sys/class/pwm/pwmchip" << chipNumberr << "/unexport"; // PWMFile
+  ss.clear();                                                    //
+  ss.str(std::string());                                         //
+  ss << "/sys/class/pwm/pwmchip" << chipNumberr << "/unexport";  // PWMFile
   PWMUnexportFile = ss.str();
-  ss.clear();            //
-  ss.str(std::string()); //
+  ss.clear();             //
+  ss.str(std::string());  //
 
   ofs.open(PWMExportFile.c_str(), std::ios::app);
   if (!(ofs.is_open())) {
     std::cout << "Cannot export the PWM Pin\n";
     // throw exception;
   } else {
-    ofs << PWMNumber; // write pin number to export file
-    ofs.close();      // and close the file
+    ofs << PWMNumber;  // write pin number to export file
+    ofs.close();       // and close the file
     int dummy;
     std::cout << "Exported PWM pin." << std::endl;
   }
@@ -92,9 +93,9 @@ PWM::~PWM() {
     std::cout << "Cannot unexport the PWM Pin\n";
     // throw exception;
   } else {
-    ofs << PWMNumber; // write pin number to unexport file
+    ofs << PWMNumber;  // write pin number to unexport file
   }
-  ofs.close(); // and close the file
+  ofs.close();  // and close the file
 }
 
 void PWM::setPeriod(int Periodd) {
@@ -153,7 +154,7 @@ void PWM::enable(int enablee) {
     int temp = DutyCycle;
     setDutyCycle(0);
     DutyCycle = temp;
-  } else if (enablee == 1) // otherwise reactivate PWM before enabling
+  } else if (enablee == 1)  // otherwise reactivate PWM before enabling
   {
     setDutyCycle(DutyCycle);
   }

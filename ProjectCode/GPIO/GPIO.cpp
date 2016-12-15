@@ -1,3 +1,4 @@
+// Author: Augustus Ellis
 #include "GPIO.h"
 
 GPIO::GPIO(int gpioPinNumberr, std::string directionn) {
@@ -37,8 +38,8 @@ GPIO::GPIO(int gpioPinNumberr, std::string directionn) {
     // throw exception;
   } else {
     // If connecting to the export file works, we export the pin number.
-    ofs << gpioPinNumber; // write pin number to export file
-    ofs.close();          // and close the file
+    ofs << gpioPinNumber;  // write pin number to export file
+    ofs.close();           // and close the file
   }
 
   // Set the pin direction
@@ -61,8 +62,8 @@ GPIO::~GPIO() {
     // throw exception;
   } else {
     // If connecting to the export file works, we export the pin number.
-    ofs << gpioPinNumber; // write pin number to export file
-    ofs.close();          // and close the file
+    ofs << gpioPinNumber;  // write pin number to export file
+    ofs.close();           // and close the file
   }
 }
 

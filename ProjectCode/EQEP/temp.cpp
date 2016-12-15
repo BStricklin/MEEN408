@@ -1,6 +1,6 @@
-#include "EQEP.h"
-#include <iostream>
 #include <unistd.h>
+#include <iostream>
+#include "EQEP.h"
 
 int main() {
   EQEP myEQEP(0);

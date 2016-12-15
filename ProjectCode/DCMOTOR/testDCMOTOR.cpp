@@ -1,7 +1,7 @@
-#include "DCMOTOR.h"
+#include <unistd.h>
 #include <iostream>
 #include <string>
-#include <unistd.h>
+#include "DCMOTOR.h"
 using namespace std;
 int main() {
   cout << " Will this do anything at all?" << endl;
@@ -10,33 +10,32 @@ int main() {
   int check = 0;
   cin >> check;
 
- for (int i = 0; i < 10; i++){
-  // Start of Turn One
-  myDCMOTOR.enable(0);
-  myDCMOTOR.setPWMDutyCycle(75);
-  myDCMOTOR.setDirection(1);
-  cout << "Start Turn     " << endl;
-  cout << "Angle:   " << myDCMOTOR.getAngle() << endl;
-  myDCMOTOR.enable(1);
-  usleep(800000);
-  myDCMOTOR.enable(0);
-  usleep(500000);
-  cout << "End Turn     " << endl;
-  cout << "Angle:   " << myDCMOTOR.getAngle() << endl;
-  // End of Turn One
+  for (int i = 0; i < 10; i++) {
+    // Start of Turn One
+    myDCMOTOR.enable(0);
+    myDCMOTOR.setPWMDutyCycle(75);
+    myDCMOTOR.setDirection(1);
+    cout << "Start Turn     " << endl;
+    cout << "Angle:   " << myDCMOTOR.getAngle() << endl;
+    myDCMOTOR.enable(1);
+    usleep(800000);
+    myDCMOTOR.enable(0);
+    usleep(500000);
+    cout << "End Turn     " << endl;
+    cout << "Angle:   " << myDCMOTOR.getAngle() << endl;
+    // End of Turn One
 
-  // Start of Turn Two
-  myDCMOTOR.setPWMDutyCycle(75);
-  myDCMOTOR.setDirection(-1);
-  cout << "\nStart Turn     " << endl;
-  cout << "Angle:   " << myDCMOTOR.getAngle() << endl;
-  myDCMOTOR.enable(1);
-  usleep(800000);
-  myDCMOTOR.enable(0);
-  usleep(500000);
-  cout << "End Turn        " << endl;
-  cout << "Angle:   " << myDCMOTOR.getAngle() << endl;
-  usleep(500000);
-}
-
+    // Start of Turn Two
+    myDCMOTOR.setPWMDutyCycle(75);
+    myDCMOTOR.setDirection(-1);
+    cout << "\nStart Turn     " << endl;
+    cout << "Angle:   " << myDCMOTOR.getAngle() << endl;
+    myDCMOTOR.enable(1);
+    usleep(800000);
+    myDCMOTOR.enable(0);
+    usleep(500000);
+    cout << "End Turn        " << endl;
+    cout << "Angle:   " << myDCMOTOR.getAngle() << endl;
+    usleep(500000);
+  }
 }

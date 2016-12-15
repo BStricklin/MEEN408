@@ -1,7 +1,7 @@
-#include "PWM.h"
+#include <unistd.h>
 #include <iostream>
 #include <string>
-#include <unistd.h>
+#include "PWM.h"
 
 int main() {
   PWM myPWM(0, 1, 1000000, 500000);
@@ -10,7 +10,7 @@ int main() {
   myPWM.enable(1);
 
   // increase the duty cycle from 0% to 100% in 10 seconds smoothly
-  double timeToFullLight = 10; // seconds
+  double timeToFullLight = 10;  // seconds
   int numberOfIncrements = 1000;
   for (int i = 0; i < numberOfIncrements; i++) {
     std::cout << "count " << i << std::endl;
