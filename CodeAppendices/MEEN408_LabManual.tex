@@ -21,9 +21,9 @@
 \usepackage[dvipsnames]{xcolor}
 \hypersetup{
 	colorlinks,
-	linkcolor={blue!50!black},
-	citecolor={blue!50!black},
-	urlcolor={blue!50!black},
+	linkcolor={blue!70!black},
+	citecolor={blue!70!black},
+	urlcolor={blue!70!black},
 	linktoc=page
 }
 
@@ -58,12 +58,12 @@
 \newcolumntype{G}{ >{\arraybackslash} m{0.33\textwidth} }
 
 %% no indentation
-\setlength{\parindent}{0pt}
+\setlength{\parindent}{12pt}
 
 %%header and footer
 \fancyhf{}
 \renewcommand{\footrulewidth}{0.4pt}
-\rhead{MEEN 408 Lab Manual}
+\rhead{MEEN 408 Team 1 Code Base}
 \rfoot{Page~\textbf{\thepage}~of~\textbf{\pageref*{LastPage}}}
 \lfoot{Introduction to Robotics, Texas A\&M University}
 \pagestyle{fancy}
@@ -86,7 +86,7 @@
 			basicstyle=\ttfamily, 
 			keywordstyle=\color{blue}\ttfamily, 
 			stringstyle=\color{ForestGreen}\ttfamily,	
-			commentstyle=\color{Dandelion}\ttfamily,
+			commentstyle=\color{teal}\ttfamily,
 			identifierstyle=\ttfamily,
 			morecomment=[l][\color{magenta}]{\#}
 		}
@@ -98,15 +98,18 @@
 %%Front Page
 %% Front Page
 {\setstretch{2}
-\thispagestyle{empty}
+\vspace*{0.45\textwidth}
 \begin{center}
-\textbf{\Huge MEEN 408: \\ Introduction to Robotics} \\
-\Huge Lab Manual \\
+{\Huge \textbf{Appendix C}}\\
+\textbf{\LARGE {\Huge R}OBOTICS {\Huge B}EAGLEBONE {\Huge P}ROGRAMMING \\}
+{\Large MEEN 408 Team 1\\
+Fall 2016
+Texas A\&M University}
 \end{center}
+\vspace*{\bigskipamount}
 }
-
-\setstretch{1}
 \clearpage
+\setstretch{1}
 
 %% Revision Table
 \begin{center}
@@ -116,7 +119,7 @@
 	\begin{tabular}{ A B A B C}
 		\toprule
 		\textbf{Version} 	& \textbf{Date} 		& \textbf{Author} 	& 	\textbf{Reviewed} 	& \textbf{Details} \\ \midrule
-		1.0					& 11/24/2016 			& AJE 				& 	---			 		& Document Creation \\ \midrule
+		1.0					& 12/15/2016 			& AJE 				& 	---			 		& Document Creation \\ \midrule
 							& 						&					&			 			& \\ \midrule
 							& 						&					&			 			& \\ \bottomrule
 
@@ -129,27 +132,6 @@
 \tableofcontents
 
 \clearpage
-%% List of Figures and List of Tables
-\listoffigures
-\listoftables
-
-\clearpage
-%% Acronyms and Abbreviations+
-\begin{center}
-	\begin{table}
-		\centering
-		\caption{Acronyms and Abbreviations}
-		\label{tab:Acronyms and Abbreviations} 
-		\begin{tabular}{ D D }
-			\toprule
-			\textbf{Acronym or Abbreviation} 	& \textbf{Meaning}  						\\ \midrule
-			ROS									& Robot Operating System					\\ \midrule
-			SSH 								& Secure SHell			 					\\ \bottomrule
-		\end{tabular}
-	\end{table}
-\end{center}
-
-\clearpage
 %% Some basic info for whomsoever reads this document
 \section*{A Note to The Reader}
 \addcontentsline{toc}{section}{A Note to The Reader}
@@ -157,44 +139,94 @@
 \subsection*{Digital Document}
 This document was prepared in \LaTeX -- a dynamic document processor. As such, the document is intended for digital use. Throughout, there are hyperlinks, highlighted in blue, like \href{https://en.wikipedia.org/wiki/Robot}{this}.
 %% End of Preamble
-\clearpage
-\section{Lab 1: ROS Installation and \protect\CC}
-\clearpage
-\section{Lab 2: Hello World with ROS}
-\clearpage
-\section{Lab 3: Topic Example}
-\clearpage
-\section{Lab 4: Control of Built-In LEDS}
-\lstinputlisting[style=C++Style]{"../LabCode/Lab04\string_LedsCPP/leds.cpp"}
 
 \clearpage
-\section{Lab 5: GPIO and using \protect\CC}
-\lstinputlisting[style=C++Style]{"../LabCode/Lab05\string_GPIOCPP/gpio.cpp"}
-
-\clearpage
-\section{Lab 6: ADC and \protect\CC}
-\lstinputlisting[style=C++Style]{"../LabCode/Lab06\string_ADCCPP/adc.cpp"}
-
-\clearpage
-\section{Lab 7: PWM and \protect\CC}
-\lstinputlisting[style=C++Style]{"../LabCode/Lab07\string_PWMCPP/pwm.cpp"}
-
-\clearpage
-\section{Lab 8: Quadrature Encoder}
-	\subsection{ eQEP Setup}
-	\subsection{ eQEP with \protect\CC}
-	\lstinputlisting[style=C++Style]{"../LabCode/Lab08\string_EQEPCPP/quad.cpp"}
+\section{Hardware Interaction}
+\subsection{Device Tree Overlays and .dts Files}
+	Computers (especially those aimed at embedded operations such as the Beaglebone) typically come fitted with a smoregasboard of useful I/O devices--such as gpio pins, pulse width modulating signals, analog-to-digital converters, etc--built right into the board. And while the Beaglebone does indeed come with all of these devices physically attached, it is the joy and responsibility of the operating system (in conjunction with the user) to access them in a programmatic and useful way. The solution originally adopted by the Linux community for accessing these devices was to create a system in which the Linux Kernel (the lowest level of the Linux operating system that already performs all the bare-metal operation on the computer components) would be recompiled when needed with additional hardware access to these other peripheral devices. Unfortunately, this method required the kernel to be recompiled whenever the devices or their connections changed, which is quite a bother, especially when device changes happen frequently. To the rescue comes the Device Tree Overlay, which is a way in which kernel (linux) fragments can bed added to the kernel at runtime, meaning device connections that once required a recompile could now be added without even turning the computer off. In this way, users keep the benefit of being able to communicate with low-level devices without having the inconvenience of a constantly recompiling kernel. The common method for adding these fragments is through a compiled .dts (device tree) file. 
 	
+	The structure of a dts file is not too complicated. It begins with information about the system the particular dts file was made for (which type of computer, supported devices, version number, etc) and any other programs it has as dependencies. The rest of the file consists of kernel fragments, as shown in the dts file below. Each fragment consists of a target (physical device) and any sequence of operations be performed on that device (provide access to device, activate device, etc.) In the file below, which is activating two of the PWMs on the Beaglebone, the pin chip (am33x) is first activated, followed by the two pwm chips, and finally the actual pwm modules on each chip. 
+	
+	These dts files are compiled to dtbo files and added to the kernel. What happens after this point is dependent on the particular system, but on the Beaglebone a typical result is that a directory is created on the Beaglebone containing files that point to various properties of the activated device. The properties of the corresponding device can be read and changed by reading/writing to/and from these files. This directory and its files are part of a virtual filesystem monitored by the operating system. 
+	\clearpage
+	\lstinputlisting[style=C++Style]{"../ProjectCode/DTS/BB-PWM12-00A0.dts"}
 \clearpage
-\section{Lab 9: Putting it all Together---Making your own \protect\CC ~Library}
+\subsection{C++ Access}
+As stated in the subsection above, devices on the Beaglebone are accessed through a virtual files system (though to the user this appears to be a regular file system). Thus , one of the easiest ways to access peripheral device in code is to read and write from these device files. And that is exactly what we do. A class was created for each type of peripheral device needed for the project that could be used in any C++ code to access the peripheral devices.
+
+\subsubsection{General Purpose Input/Output (GPIO) Pins}
+General Purpose Input/Output (gpio) pins can be used to either get a boolean reading of a signal (on/off) or to perform simple voltage outputs (3.3V on / 0V off). They were used to control motor enable and direction switches.
+\lstinputlisting[style=C++Style]{"../ProjectCode/GPIO/GPIO.h"} 
+\clearpage
+\lstinputlisting[style=C++Style]{"../ProjectCode/GPIO/GPIO.cpp"}
+\clearpage
+
+\subsubsection{Analog to Digital Converters}
+Analog to digital converters take an analog signal between 0 and 1.8 V and return a digital reading between 0 and 4095 corresponding to this input signal. They are used for low level voltage analog readings.
+\lstinputlisting[style=C++Style]{"../ProjectCode/ADC/ADC.h"}
+\clearpage
+\lstinputlisting[style=C++Style]{"../ProjectCode/ADC/ADC.cpp"}
+\clearpage
+
+\subsubsection{Pulse Width Modulated (PWM) Signal}
+Pulse width modulated signals were used to control motor drivers and servomotors. The Beaglebone black has 6 PWMs in 3 A/B pairs.
+\lstinputlisting[style=C++Style]{"../ProjectCode/PWM/PWM.h"}
+\clearpage
+\lstinputlisting[style=C++Style]{"../ProjectCode/PWM/PWM.cpp"}
+\clearpage
+
+\subsubsection{Quadrature Encoders}
+Pulse width modulated signals were used to control motor drivers and servomotors.
+\lstinputlisting[style=C++Style]{"../ProjectCode/EQEP/EQEP.h"}
+\clearpage
+\lstinputlisting[style=C++Style]{"../ProjectCode/EQEP/EQEP.cpp"}
+\clearpage
+
+\subsubsection{DC Motor}
+Motor control and motor encoder readings were abstracted into a DCMOTOR class containing a PWM signal class and a EQEP encoder class. This class was used to drive the joint motors.
+\lstinputlisting[style=C++Style]{"../ProjectCode/DCMOTOR/DCMOTOR.h"}
+\clearpage
+\lstinputlisting[style=C++Style]{"../ProjectCode/DCMOTOR/DCMOTOR.cpp"}
+\clearpage
+
+\subsubsection{Servomotor}
+Servomotor control takes place in a SERVOMOTOR class containing a PWM signal class and methods for relating a desired angle to the duty cycle of that PWM.
+\lstinputlisting[style=C++Style]{"../ProjectCode/SERVOMOTOR/SERVOMOTOR.h"}
+\clearpage
+\lstinputlisting[style=C++Style]{"../ProjectCode/SERVOMOTOR/SERVOMOTOR.cpp"}
+\clearpage
+
+\section{Robot Control - ROS}
+Since it was not guaranteed or desired that each motor be connected to the same physical device, the Robot Operting System and it's ability to automate this distributed computing through nodes  was taken advantage of through the creation of several Nodes for controlling DC Motors, Servomotors, and communicating commands.
+\subsubsection{DC Motor ROS Node}
+\lstinputlisting[style=C++Style]{"../ProjectCode/ROS/DC1\string_node.cpp"} \vspace{12pt}
 
 
+\subsubsection{GRIPPER ROS Node}
+Servomotor control takes place in a SERVOMOTOR class containing a PWM signal class and methods for relating a desired angle to the duty cycle of that PWM.
+\lstinputlisting[style=C++Style]{"../ProjectCode/ROS/GRIPPER\string_node.cpp"}
 \clearpage
-\section{Lab 10: ROS Network Setting}
 
+\section{GUI}
+Human interaction with the program was accomplished through a simple Graphical User Interface (GUI) created in matlab and connected to the ROS network via the Robot Control Toolbox, which allows one to create ROS nodes in  MATLAB.
+\subsubsection{ROS\textunderscore READER}
+Matlab program that produces a ROS node that sends trajectory information and control signals to the motor.
+\lstinputlisting[style=C++Style]{"../ProjectCode/GUI/ROS\string_READER.m"}
 \clearpage
-\section{Lab 11: Servomotor}
+\subsubsection{datasend\textunderscore Callback}
+\lstinputlisting[style=C++Style]{"../ProjectCode/GUI/datasend\string_Callback.m"}
+\clearpage
+\subsubsection{startbutton\textunderscore Callback}
+\lstinputlisting[style=C++Style]{"../ProjectCode/GUI/startbutton\string_Callback.m"}
+\clearpage
+\subsubsection{PathFollowPendulum}
+\lstinputlisting[style=C++Style]{"../ProjectCode/GUI/PathFollowPendulum.m"}
+\clearpage
+\subsubsection{Camera Image Processing}
+\lstinputlisting[style=C++Style]{"../ProjectCode/GUI/MEEN408\string_Vision.m"}
+\clearpage
+\subsubsection{imageprocess\textunderscore Callback}
+\lstinputlisting[style=C++Style]{"../ProjectCode/GUI/imageprocess\string_Callback.m"}
+\clearpage
 
-\clearpage
-\section{Lab 12: DC Motor, BBB, and ROS}
 \end{document}
